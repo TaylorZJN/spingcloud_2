@@ -1,0 +1,43 @@
+version: '2'
+services:
+  server1:
+    build: .
+#    image: eurekaserver:v1
+#    container_name: server1
+    restart: always
+#    hostname: server1
+    networks:
+      - eureka-net
+    ports:
+    - 10001:10001
+    environment:
+      - spring.profiles.active=server1
+
+  server2:
+    build: .
+#    image: eurekaserver:v1
+#    container_name: server2
+#    hostname: server2
+    networks:
+      - eureka-net
+    ports:
+    - 10002:10002
+    environment:
+      - spring.profiles.active=server2
+
+  server3:
+    build: .
+#    image: eurekaserver:v1
+#    container_name: server3
+#    hostname: server3
+    networks:
+      - eureka-net
+    ports:
+      - 10003:10003
+    environment:
+      - spring.profiles.active=server3
+
+networks:
+  eureka-net:
+    driver: bridge
+

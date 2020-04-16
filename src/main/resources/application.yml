@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: aodun-eureka-server
+
+
+---
+spring:
+  profiles: server1
+
+server:
+  port: 10001
+
+eureka:
+  instance:
+    hostname: 119.29.246.191
+#    prefer-ip-address: true
+    instance-id: 119.29.246.191:${server.port}
+    lease-expiration-duration-in-seconds: 5
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://119.29.246.191:10002/eureka/,http://119.29.246.191:10003/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+
+
+---
+spring:
+  profiles: server2
+
+server:
+  port: 10002
+
+eureka:
+  instance:
+    hostname: 119.29.246.191
+#    prefer-ip-address: true
+    instance-id: 119.29.246.191:${server.port}
+    lease-expiration-duration-in-seconds: 5
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://119.29.246.191:10001/eureka/,http://119.29.246.191:10003/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+---
+spring:
+  profiles: server3
+
+server:
+  port: 10003
+
+eureka:
+  instance:
+    hostname: 119.29.246.191
+#    prefer-ip-address: true
+    instance-id: 119.29.246.191:${server.port}
+    lease-expiration-duration-in-seconds: 5
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://119.29.246.191:10002/eureka/,http://119.29.246.191:10001/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000

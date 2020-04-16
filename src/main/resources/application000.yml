@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: server1
+server:
+  port: 1001
+
+eureka:
+  instance:
+    hostname: server1
+    prefer-ip-address: false
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server2:1002/eureka/,http://server3:1013/eureka/
+
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+
+---
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: server2
+
+server:
+  port: 1002
+
+eureka:
+  instance:
+    hostname: server2
+    prefer-ip-address: false
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server1:1001/eureka/,http://server3:1013/eureka/
+
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+
+---
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: server3
+
+server:
+  port: 1013
+
+eureka:
+  instance:
+    hostname: server3
+    prefer-ip-address: false
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server1:1001/eureka/,http://server2:1002/eureka/
+
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+
+

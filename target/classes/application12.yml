@@ -1,0 +1,59 @@
+spring:
+  profiles : server1
+  application:
+    name: aodun-eureka-server
+
+server:
+  port: 1001
+
+eureka:
+  instance:
+    hostname: server1
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server2:1002/eureka/,http://server3:1003/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+---
+spring:
+  profiles: server2
+  application:
+    name: aodun-eureka-server
+
+server:
+  port: 1002
+
+eureka:
+  instance:
+    hostname: server2
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server1:1001/eureka/,http://server3:1003/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+---
+spring:
+  profiles: server3
+  application:
+    name: aodun-eureka-server
+
+server:
+  port: 1003
+
+eureka:
+  instance:
+    hostname: server3
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://server2:1002/eureka/,http://server1:1001/eureka/
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
